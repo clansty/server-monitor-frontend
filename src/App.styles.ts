@@ -65,3 +65,12 @@ export const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
 }));
+
+/**
+ * 自定义样式组件，头部的布局样式
+ */
+export const HeaderArea = styled("div")({
+  width: "100%",
+  display: "flex",
+  justifyContent: "space-between",
+});

@@ -10,23 +10,31 @@ import {
   ListItemText,
   Divider,
   IconButton,
+  Typography,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
   ChevronLeft as ChevronLeftIcon,
+  LightMode as LightModeIcon,
+  Nightlight as NightlightIcon,
 } from "@mui/icons-material";
+import { useTheme } from "@mui/material/styles";
+
+import ThemeModeContext from "./store/theme";
 import routes from "./routes";
 import CPU from "./views/CPU";
 import Memory from "./views/Memory";
 import Network from "./views/Network";
-import { Main, AppBar, DrawerHeader } from "./App.styles";
+import { Main, AppBar, DrawerHeader, HeaderArea } from "./App.styles";
 
 const drawerWidth = 240;
 
 export default function App() {
-  let navigate = useNavigate();
-  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const theme = useTheme();
+  const themeMode = React.useContext(ThemeModeContext);
 
   // 切换 Drawer 的开关
   const toggleDrawer = (tmp: boolean) => {
@@ -57,9 +65,22 @@ export default function App() {
           >
             <MenuIcon />
           </IconButton>
-          {/* <Typography variant="h6" noWrap component="div">
-            Persistent drawer
-          </Typography> */}
+          <HeaderArea>
+            <Typography variant="h6" noWrap component="div">
+              Server monitor
+            </Typography>
+            <IconButton
+              sx={{ ml: 1 }}
+              onClick={themeMode.toggleThemeMode}
+              color="inherit"
+            >
+              {theme.palette.mode === "dark" ? (
+                <NightlightIcon />
+              ) : (
+                <LightModeIcon />
+              )}
+            </IconButton>
+          </HeaderArea>
         </Toolbar>
       </AppBar>
 
