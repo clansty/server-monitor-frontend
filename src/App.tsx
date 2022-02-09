@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import {
   Box,
   Drawer,
@@ -25,16 +25,23 @@ import routes from "./routes";
 import CPU from "./views/CPU";
 import Memory from "./views/Memory";
 import Network from "./views/Network";
+import Process from "./views/Process";
 import { Main, AppBar, DrawerHeader, HeaderArea } from "./App.styles";
 
 const drawerWidth = 240;
 
 export default function App() {
   const navigate = useNavigate();
+  const route = useLocation(); // URL 路由信息
   const [open, setOpen] = useState(true);
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedPath, setSelectedPath] = useState("");
   const theme = useTheme();
   const themeMode = React.useContext(ThemeModeContext);
+
+  useEffect(() => {
+    setSelectedPath(route.pathname);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])  
 
   // 切换 Drawer 的开关
   const toggleDrawer = (tmp: boolean) => {
@@ -47,7 +54,7 @@ export default function App() {
     path: string,
     index: number
   ) => {
-    setSelectedIndex(index);
+    setSelectedPath(path);
     navigate(path);
   };
 
@@ -107,7 +114,7 @@ export default function App() {
           {routes.map((item, index) => (
             <ListItemButton
               key={item.path}
-              selected={selectedIndex === index}
+              selected={selectedPath === item.path}
               onClick={(event) => handleListItemClick(event, item.path, index)}
             >
               <ListItemText primary={item.name} />
@@ -122,6 +129,7 @@ export default function App() {
           <Route path="/" element={<CPU />} />
           <Route path="/memory" element={<Memory />} />
           <Route path="/network" element={<Network />} />
+          <Route path="/process" element={<Process />} />
         </Routes>
       </Main>
     </Box>

@@ -19,6 +19,10 @@ const routes: IRoute[] = [
     path: "/network",
     name: "网络",
   },
+  {
+    path: "/process",
+    name: "进程"
+  }
 ];
 
 export default routes;
