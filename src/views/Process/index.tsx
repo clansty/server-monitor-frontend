@@ -19,7 +19,6 @@ function Process() {
 
   useEffect(() => {
     fetchProcessInfo().then((res) => {
-      console.log(res.data);
       setProcess(res.data);
     })
   },[])

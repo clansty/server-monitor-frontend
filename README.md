@@ -6,3 +6,5 @@
 - [mui](https://mui.com/zh/)
 - [recharts](https://recharts.org/zh-CN)
 - react-router-dom
+- [numeral](http://numeraljs.com/) (额外安装 @types/lodash)
+- lodash ()

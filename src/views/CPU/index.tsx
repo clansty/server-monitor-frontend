@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import DataBlock from "../../components/CPUBlock";
+import { Box, Card, Grid, Typography } from "@mui/material";
 import { fetchCPUinfo } from "../../api/cpu";
-import { Box, Grid, Typography } from "@mui/material";
+import DataBlock from "../../components/CPUBlock";
+import CPUChart from "./CPUChart";
 
 interface ICPU {
   total: string;
@@ -32,30 +33,14 @@ function CPU() {
 
   return (
     <>
-      <Box sx={{ pb: 5 }}>
+      {/* CPU 大概数据 --- start --- */}
+
+      {/* CPU 大概数据 --- end --- */}
+      
+      {/* CPU 相关指标 --- start --- */}
+      <Box sx={{ pb: 5, pl: 5 }}>
         <Typography variant="h5">CPU 相关状态数据</Typography>
       </Box>
-      {/* 进程 相关指标 --- start --- */}
-      {/* <Grid container spacing={2}>
-        <Grid item xs={3}>
-          <DataBlock title="进程总数" data={cpu.total} />
-        </Grid>
-        <Grid item xs={3}>
-          <DataBlock title="正在运行的进程数" data={cpu.running} />
-        </Grid>
-        <Grid item xs={3}>
-          <DataBlock title="睡眠的进程数" data={cpu.sleeping} />
-        </Grid>
-        <Grid item xs={3}>
-          <DataBlock title="停止的进程数" data={cpu.stopped} />
-        </Grid>
-        <Grid item xs={3}>
-          <DataBlock title="僵尸进程数" data={cpu.zombie} />
-        </Grid>
-      </Grid> */}
-      {/* 进程 相关指标 --- end --- */}
-
-      {/* CPU 相关指标 --- start --- */}
       <Grid container spacing={2}>
         <Grid item xs={3}>
           <DataBlock title="用户空间占用CPU百分比" data={cpu.us} />
@@ -64,10 +49,7 @@ function CPU() {
           <DataBlock title="内核空间占用CPU百分比" data={cpu.sy} />
         </Grid>
         <Grid item xs={3}>
-          <DataBlock
-            title="改变过优先级的进程占用CPU的百分比"
-            data={cpu.ni}
-          />
+          <DataBlock title="改变过优先级的进程占用CPU的百分比" data={cpu.ni} />
         </Grid>
         <Grid item xs={3}>
           <DataBlock title="空闲 CPU 百分比" data={cpu.id} />
@@ -86,6 +68,20 @@ function CPU() {
         </Grid>
       </Grid>
       {/* CPU 相关指标 --- end --- */}
+
+      {/* CPU 图表 --- start --- */}
+      <Card
+        variant="outlined"
+        sx={{
+          mt: 5,
+        }}
+      >
+        <Box sx={{ p: 5 }}>
+          <Typography variant="h5">CPU 相关状态数据</Typography>
+        </Box>
+        <CPUChart />
+      </Card>
+      {/* CPU 图表 --- end --- */}
     </>
   );
 }
