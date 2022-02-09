@@ -31,7 +31,7 @@ function CPU() {
   }, []);
 
   return (
-    <div>
+    <>
       <Box sx={{ pb: 5 }}>
         <Typography variant="h5">CPU 相关状态数据</Typography>
       </Box>
@@ -86,7 +86,7 @@ function CPU() {
         </Grid>
       </Grid>
       {/* CPU 相关指标 --- end --- */}
-    </div>
+    </>
   );
 }
 
