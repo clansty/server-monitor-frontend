@@ -3,13 +3,29 @@ import numeral from "numeral";
 /**
  * 转换为百分数
  */
-export function fPercent(number: number) {
+export function tofPercent(number: number) {
   return numeral(number / 100).format("0.0%");
+}
+
+/**
+ * 转换为数字（有千位分隔符）
+ */
+export function tofNumber(number: string | number) {
+  return numeral(number).format();
 }
 
 /**
  * 转换为数字
  */
-export function fNumber(number: string | number) {
-  return numeral(number).format();
+export function toNumber(number: string):number {
+  return numeral(number).value() as number;
+}
+
+/**
+ * 传入两个数据，返回它们的差
+ */
+export function toNumberWithSub(number1: string | number, number2: string | number): number {
+  return numeral(
+    (numeral(number1).value() as number) - (numeral(number2).value() as number)
+  ).value() as number;
 }

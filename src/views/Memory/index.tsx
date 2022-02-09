@@ -3,57 +3,54 @@ import { Box, Grid, Typography, Card } from "@mui/material";
 import { fetchMemoryInfo } from "../../api/memory";
 import MemoryBlock from "../../components/MemoryBlock";
 import MemoryChart from "./MemoryChart";
-
-interface IMemory {
-  buffers: string;
-  free: string;
-  total: string;
-  used: string;
-}
+import MemoryInfo from "./MemoryInfo";
+import { IMemory } from "../../types";
+import { toNumber, toNumberWithSub } from "../../utils/formatNumber";
 
 function Memory() {
   const [memory, setMemory] = useState<IMemory>({} as IMemory);
 
   useEffect(() => {
     fetchMemoryInfo().then((res) => {
-      console.log(res.data);
-
       setMemory(res.data);
     });
   }, []);
 
   return (
     <>
-      <Box sx={{ pb: 5 }}>
-        <Typography variant="h5">内存 相关状态数据</Typography>
-      </Box>
+      <MemoryInfo memory={memory} />
 
       {/* 内存 相关指标 --- start --- */}
+      <Box sx={{ pb: 5, pl: 5, pt: 5 }}>
+        <Typography variant="h5">内存 相关状态数据</Typography>
+      </Box>
       <Grid container spacing={2}>
-        <Grid item xs={3}>
-          <MemoryBlock title="物理内存总量" data={memory.total} />
+        <Grid item xs={4}>
+          <MemoryBlock title="总内存" data={memory.MemTotal} />
         </Grid>
-        <Grid item xs={3}>
-          <MemoryBlock title="使用的物理内存总量" data={memory.used} />
+        <Grid item xs={4}>
+          <MemoryBlock title="空闲内存" data={memory.MemFree} />
         </Grid>
-        <Grid item xs={3}>
-          <MemoryBlock title="空闲内存总量" data={memory.free} />
-        </Grid>
-        <Grid item xs={3}>
-          <MemoryBlock title="内核缓存的内存量" data={memory.buffers} />
+        <Grid item xs={4}>
+          <MemoryBlock title="可用内存" data={memory.MemFree} />
         </Grid>
       </Grid>
       {/* 内存 相关指标 --- end --- */}
 
+      {/* 内存 图表 --- start --- */}
       <Card
+        variant="outlined"
         sx={{
-          width: "42%",
-          height: 500,
           mt: 5,
         }}
       >
-        <MemoryChart />
+        <MemoryChart
+          total={toNumber(memory.MemTotal)}
+          used={toNumberWithSub(memory.MemTotal, memory.MemFree)}
+          free={toNumber(memory.MemFree)}
+        />
       </Card>
+      {/* 内存 图表 --- end --- */}
     </>
   );
 }

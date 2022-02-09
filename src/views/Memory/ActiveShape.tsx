@@ -15,9 +15,9 @@ const ActiveShape = (props: any) => {
     endAngle,
     fill,
     payload,
-    percent,
     value,
   } = props;
+  
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
   const sx = cx + (outerRadius + 10) * cos;
@@ -62,16 +62,7 @@ const ActiveShape = (props: any) => {
         y={ey}
         textAnchor={textAnchor}
         fill="#6d6d6d"
-      >{`PV ${value}`}</text>
-      <text
-        x={ex + (cos >= 0 ? 1 : -1) * 12}
-        y={ey}
-        dy={18}
-        textAnchor={textAnchor}
-        fill="#999"
-      >
-        {`(Rate ${(percent * 100).toFixed(2)}%)`}
-      </text>
+      >{`${value} KB`}</text>
     </g>
   );
 };

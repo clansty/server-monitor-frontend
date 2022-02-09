@@ -63,7 +63,7 @@ const CPUChart = () => {
   console.log("CPUChart");
   
   return (
-    <ResponsiveContainer width="100%" height={500}>
+    <ResponsiveContainer width="95%" height={500}>
       <LineChart
         data={data}
         margin={{
