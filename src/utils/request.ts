@@ -11,7 +11,7 @@ interface ResponseType<T = any> {
 }
 
 const instance = axios.create({
-  baseURL: "http://127.0.0.1:4523/mock/621430/",
+  baseURL: "https://qclzas.api.cloudendpoint.cn/",
   // timeout: 5000,
 });
 

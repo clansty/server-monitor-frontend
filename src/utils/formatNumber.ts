@@ -29,3 +29,13 @@ export function toNumberWithSub(number1: string | number, number2: string | numb
     (numeral(number1).value() as number) - (numeral(number2).value() as number)
   ).value() as number;
 }
+
+/**
+ * 将时间戳转时间
+ */
+export function toTime(time: number): string {
+  const unixTimestamp = new Date(time * 1000);
+  const commonTime = unixTimestamp.toLocaleString();
+  
+  return commonTime.split(" ")[1];
+}

@@ -1,28 +1,16 @@
-import { useState, useEffect } from "react";
-import { Box, Card, Grid, Typography } from "@mui/material";
-import { fetchCPUinfo } from "../../api/cpu";
-import { ICPU } from "../../types";
-import DataBlock from "../../components/CPUBlock";
-import CPUChart from "./CPUChart";
-import CPUInfo from "./CPUInfo";
+import CPUUsageChart from "./CPUUsageChart";
+import CpuLoadavgChart from "./CpuLoadavgChart";
+import BaseCpuUsageChart from "./BaseCpuUsageChart";
 
 function CPU() {
-  const [cpu, setCpu] = useState<ICPU>({} as ICPU);
-
-  useEffect(() => {
-    fetchCPUinfo().then((res) => {
-      setCpu(res.data);
-    });
-  }, []);
-
   return (
     <>
       {/* CPU 大概数据 --- start --- */}
-      <CPUInfo cpu={cpu} />
+      {/* <CPUInfo cpu={cpu} /> */}
       {/* CPU 大概数据 --- end --- */}
 
       {/* CPU 相关指标 --- start --- */}
-      <Box sx={{ p: 5 }}>
+      {/* <Box sx={{ p: 5 }}>
         <Typography variant="h5">CPU 相关状态数据</Typography>
       </Box>
       <Grid container spacing={2}>
@@ -53,23 +41,12 @@ function CPU() {
         <Grid item xs={3}>
           <DataBlock title="虚拟机占用百分比" data={cpu.model} />
         </Grid>
-      </Grid>
+      </Grid> */}
       {/* CPU 相关指标 --- end --- */}
 
-      {/* CPU 图表 --- start --- */}
-      <Card
-        variant="outlined"
-        sx={{
-          width: "100%",
-          mt: 5,
-        }}
-      >
-        <Box sx={{ p: 5 }}>
-          <Typography variant="h5">CPU 相关状态数据</Typography>
-        </Box>
-        <CPUChart />
-      </Card>
-      {/* CPU 图表 --- end --- */}
+      <CPUUsageChart />
+      <CpuLoadavgChart />
+      <BaseCpuUsageChart />
     </>
   );
 }

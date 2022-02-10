@@ -25,7 +25,6 @@ import routes from "./routes";
 import CPU from "./views/CPU";
 import Memory from "./views/Memory";
 import Network from "./views/Network";
-import Process from "./views/Process";
 import { Main, AppBar, DrawerHeader, HeaderArea } from "./App.styles";
 
 const drawerWidth = 240;
@@ -40,8 +39,8 @@ export default function App() {
 
   useEffect(() => {
     setSelectedPath(route.pathname);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // 切换 Drawer 的开关
   const toggleDrawer = (tmp: boolean) => {
@@ -129,7 +128,6 @@ export default function App() {
           <Route path="/" element={<CPU />} />
           <Route path="/memory" element={<Memory />} />
           <Route path="/network" element={<Network />} />
-          <Route path="/process" element={<Process />} />
         </Routes>
       </Main>
     </Box>

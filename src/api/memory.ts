@@ -1,8 +1,8 @@
 import request from "../utils/request";
 
-export function fetchMemoryInfo() {
+export function fetchMemory(params: string) {
   return request({
-    url: "/memory",
+    url: `/monitorData?metricName=${params}&period=3600`,
     method: "GET",
-  })
+  });
 }

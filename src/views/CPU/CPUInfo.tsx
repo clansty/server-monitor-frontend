@@ -1,16 +1,16 @@
-import { Box, Typography } from "@mui/material";
-import { ICPU } from "../../types";
-import DescBlock from "../../components/DescBlock";
+// import { Box, Typography } from "@mui/material";
+// import { ICPU } from "../../types";
+// import DescBlock from "../../components/DescBlock";
 
 /**
  * 显示 CPU 大致数据介绍（如内核数、厂商等）
  */
-const CPUInfo = (props: { cpu: ICPU }) => {
-  const cpu = props.cpu;
+const CPUInfo = (props: any) => {
+  // const cpu = props.cpu;
 
   return (
     <>
-      <Box sx={{ pb: 5, pl: 5 }}>
+      {/* <Box sx={{ pb: 5, pl: 5 }}>
         <Typography variant="h5">CPU 相关信息</Typography>
       </Box>
 
@@ -34,7 +34,7 @@ const CPUInfo = (props: { cpu: ICPU }) => {
         <DescBlock title="每次刷新缓存的大小单位" value={cpu["clflush size"]} />
         <DescBlock title="缓存地址对齐单位" value={cpu["cache_alignment"]} />
         <DescBlock title="可访问地址空间位数" value={cpu["address sizes"]} />
-      </Box>
+      </Box> */}
     </>
   );
 };

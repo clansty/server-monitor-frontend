@@ -16,6 +16,6 @@ const ProcessBlock = (props: IProps) => {
       </Typography>
     </Block>
   );
-}
+};
 
 export default ProcessBlock;
