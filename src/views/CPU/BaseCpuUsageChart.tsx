@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  LabelList,
 } from "recharts";
 import { fetchCPU } from "../../api/cpu";
 import { toTime } from "../../utils/formatNumber";
@@ -55,7 +56,9 @@ const BaseCpuUsageChart = () => {
           <YAxis unit="%" />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="value" stroke="#4885D7" />
+          <Line type="monotone" dataKey="value" stroke="#4885D7">
+            <LabelList dataKey="value" position="right" />
+          </Line>
         </LineChart>
       </ResponsiveContainer>
     </>

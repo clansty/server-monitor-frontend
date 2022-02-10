@@ -8,6 +8,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  LabelList,
 } from "recharts";
 
 import { fetchCPU } from "../../api/cpu";
@@ -54,12 +55,9 @@ const MemUsageChart = () => {
           <XAxis dataKey="name" />
           <YAxis unit="%" />
           <Tooltip />
-          <Area
-            type="monotone"
-            dataKey="value"
-            stroke="#8884d8"
-            fill="#8884d8"
-          />
+          <Area type="monotone" dataKey="value" stroke="#8884d8" fill="#8884d8">
+            <LabelList dataKey="value" position="center" />
+          </Area>
         </AreaChart>
       </ResponsiveContainer>
     </>

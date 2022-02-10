@@ -37,5 +37,5 @@ export function toTime(time: number): string {
   const unixTimestamp = new Date(time * 1000);
   const commonTime = unixTimestamp.toLocaleString();
   
-  return commonTime.split(" ")[1];
+  return commonTime.split(" ")[1].slice(0, -3);
 }

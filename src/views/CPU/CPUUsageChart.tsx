@@ -9,12 +9,13 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  LabelList,
 } from "recharts";
 import { fetchCPU } from "../../api/cpu";
 import { toTime } from "../../utils/formatNumber";
 
 /**
- * 显示 CPU 监控数据组件
+ * CPU 利用率
  */
 const CPUUsageChart = () => {
   const [data, setData] = useState([] as any);
@@ -30,7 +31,6 @@ const CPUUsageChart = () => {
           value: values[i],
         });
       }
-      console.log("tmp", tmp);
       setData(tmp);
     });
   }, []);
@@ -38,7 +38,7 @@ const CPUUsageChart = () => {
   return (
     <>
       <Box sx={{ p: 5 }}>
-        <Typography variant="h5">CPU 利用率</Typography>
+        <Typography variant="h5">CPU 利用率 (%)</Typography>
       </Box>
       <ResponsiveContainer width="95%" height={300}>
         <LineChart
@@ -55,7 +55,9 @@ const CPUUsageChart = () => {
           <YAxis unit="%" />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="value" stroke="#4885D7" />
+          <Line type="monotone" dataKey="value" stroke="#4885D7">
+            <LabelList dataKey="value" position="top" />
+          </Line>
         </LineChart>
       </ResponsiveContainer>
     </>

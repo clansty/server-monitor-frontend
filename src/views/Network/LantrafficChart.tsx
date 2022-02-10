@@ -11,7 +11,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import { fetchNetwork } from "../../api/network";
+import { fetchLantraffic } from "../../api/network";
 import { toTime } from "../../utils/formatNumber";
 
 type StateType = Array<{ name: string; Out: number; In: number }>;
@@ -23,26 +23,12 @@ const LantrafficChart = () => {
   const [data, setData] = useState<StateType>([]);
 
   useEffect(() => {
-    const tmp: any = [];
-    fetchNetwork("LanOuttraffic").then((res: any) => {
-      const timestamps = res.DataPoints[0].Timestamps.slice(-10);
-      const values = res.DataPoints[0].Values.slice(-10);
-
-      for (let i = 0; i < 10; i++) {
-        tmp.push({
-          name: toTime(timestamps[i]),
-          Out: values[i],
-          In: 0,
-        });
-      }
-    });
-    fetchNetwork("LanIntraffic").then((res: any) => {
-      const values = res.DataPoints[0].Values.slice(-10);
-      for (let i = 0; i < 10; i++) {
-        tmp[i].In = values[i];
-      }
-
-      setData(tmp);
+    fetchLantraffic().then((res: any) => {
+      // eslint-disable-next-line array-callback-return
+      res.map((item: any) => {
+        item.timestamps = toTime(item.timestamps);
+      });
+      setData(res);
     });
   }, []);
 
@@ -64,17 +50,17 @@ const LantrafficChart = () => {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
+          <XAxis dataKey="timestamps" />
           <YAxis />
           <Tooltip />
           <Legend />
           <Line
             type="monotone"
-            dataKey="Out"
+            dataKey="out"
             stroke="#8884d8"
             activeDot={{ r: 8 }}
           />
-          <Line type="monotone" dataKey="In" stroke="#82ca9d" />
+          <Line type="monotone" dataKey="in" stroke="#82ca9d" />
         </LineChart>
       </ResponsiveContainer>
     </>

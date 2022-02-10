@@ -9,12 +9,13 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  LabelList,
 } from "recharts";
 import { fetchCPU } from "../../api/cpu";
 import { toTime } from "../../utils/formatNumber";
 
 /**
- * 显示 CPU 监控数据组件
+ * CPU 每小时平均负载
  */
 const CpuLoadavgChart = () => {
   const [data, setData] = useState([] as any);
@@ -55,7 +56,9 @@ const CpuLoadavgChart = () => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="value" stroke="#4885D7" />
+          <Line type="monotone" dataKey="value" stroke="#4885D7">
+            <LabelList dataKey="value" position="top" />
+          </Line>
         </LineChart>
       </ResponsiveContainer>
     </>

@@ -8,6 +8,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  LabelList,
 } from "recharts";
 
 import { fetchNetwork } from "../../api/network";
@@ -56,12 +57,9 @@ const TcpCurrEstabChart = () => {
           <XAxis dataKey="name" />
           <YAxis unit="个" />
           <Tooltip />
-          <Area
-            type="monotone"
-            dataKey="count"
-            stroke="#8884d8"
-            fill="#8884d8"
-          />
+          <Area type="monotone" dataKey="count" stroke="#8884d8" fill="#8884d8">
+            <LabelList dataKey="count" position="center" />
+          </Area>
         </AreaChart>
       </ResponsiveContainer>
     </>
